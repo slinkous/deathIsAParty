@@ -21,11 +21,19 @@ export default class InputHandler {
           game.togglePause();
           break;
         case 13:
-          // game.start();
-          console.log(GAMESTATE)
+          if(game.gamestate == GAMESTATE.INTRO){
+            game.gamestate = GAMESTATE.MENU
+          }
           if(game.gamestate == GAMESTATE.MENU){
             game.start();
           }
+          if(game.gamestate == GAMESTATE.GAMEOVER
+            || game.gamestate == GAMESTATE.WIN){
+            game.restart();
+          }
+          break;
+        case 32:
+          this.inputStates["space"] = true;
           break;
       }
       this.inputStates[event.keyCode] = true;
@@ -43,6 +51,9 @@ export default class InputHandler {
           break;
         case 40:
           this.inputStates["down"] = false;
+          break;
+        case 32:
+          this.inputStates["space"] = false;
           break;
       }
     });
