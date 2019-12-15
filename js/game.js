@@ -1,8 +1,7 @@
-import InputHandler from "/js/input.js";
-import Player from "/js/player.js";
-import Sprite from "/js/sprite.js"
-import TileMap from "/js/tile.js"
-import Grave from "/js/grave.js"
+import InputHandler from "./input.js";
+import Player from "./player.js";
+import Sprite from "./sprite.js"
+import Grave from "./grave.js"
 
 export const GAMESTATE = {
   PAUSED: 0,
@@ -71,7 +70,6 @@ export class Game {
     if(Grave.countVisits() == this.graves.length){
       this.win();
     }
-    console.log(this.player.x, this.player.y)
   }
   draw(ctx, colorScheme, font){
     let sunset = [2,1,0,0,1,2]

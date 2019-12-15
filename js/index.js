@@ -34,6 +34,7 @@ for(let i = 0; i < colorScheme.length; i++){
 meta.append(fc)
 
 let canvas = document.querySelector("#gameCanvas");
+canvas.focus()
 let ctx = canvas.getContext("2d");
 
 const GAME_WIDTH = 512;
