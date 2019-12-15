@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Game Template</title>
+    <style media="screen">
+      @font-face{
+        font-family: DPComic;
+        src: url("dpcomic.ttf")
+      }
+      #gameContainer {
+        /* position: absolute; */
+      }
+      #gameCanvas {
+        /* border: 1px solid black; */
+      }
+      #colorContainer {
+        display: flex;
+      }
+      #gameAssets img {
+        display: none;
+      }
+    </style>
+    <script src="/js/index.js" charset="utf-8" type="module"></script>
+  </head>
+  <body>
+
+    <div id="gameContainer">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <div id="metaInf">
+      <div id="colorContainer">
+
+      </div>
+      <div id="fpsContainer">
+
+      </div>
+    </div>
+    <div id="gameAssets">
+      <!-- <audio id="gameMusic" src=""></audio> -->
+    </div>
+  </body>
+</html>
