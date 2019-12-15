@@ -1,7 +1,8 @@
 # Death is a Party
 
 ## Description
-Death is not the end... it's a party! This HTML5 Canvas is being made for [TriJam 49]
+Death is not the end... it's a party! This HTML5 Canvas is being made for [TriJam 49](https://itch.io/jam/trijam-49)
+![screenshot](screenshot.png)
 
 ##Concept
 
@@ -11,12 +12,10 @@ You are a ghost, who wakes at dusk, and has until dawn to wake up as many of you
 [x]Create dusk-to-dawn sky change and game over timer
 [x] Randomly place graves
 [x] Wake up ghosts and count
-5. Score and restart
-6. Add introduction (On a grave!)
-
-
-7. Ghost animations
-8. Music
+[x] Score and restart
+[x] Add introduction (On a grave!)
+[x] Ghost animations
+[x] Music
 
 MVP+
 1. Add Ascii hedge maze - running water?
