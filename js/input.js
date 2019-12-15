@@ -22,12 +22,10 @@ export default class InputHandler {
           break;
         case 13:
           if(game.gamestate == GAMESTATE.INTRO){
-            game.gamestate = GAMESTATE.MENU
-          }
-          if(game.gamestate == GAMESTATE.MENU){
+            game.goToMenu();
+          } else if(game.gamestate == GAMESTATE.MENU){
             game.start();
-          }
-          if(game.gamestate == GAMESTATE.GAMEOVER
+          }else if(game.gamestate == GAMESTATE.GAMEOVER
             || game.gamestate == GAMESTATE.WIN){
             game.restart();
           }

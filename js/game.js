@@ -32,6 +32,7 @@ export class Game {
     this.skyProgress = 0;
     this.timeSinceProgress = 0
     this.totalGraves = 10
+    Grave.initVisits();
     this.graves = []
     while(this.graves.length < this.totalGraves){
       let x = Math.floor(Math.random()*16)*32
@@ -70,6 +71,7 @@ export class Game {
     if(Grave.countVisits() == this.graves.length){
       this.win();
     }
+    console.log(this.player.x, this.player.y)
   }
   draw(ctx, colorScheme, font){
     let sunset = [2,1,0,0,1,2]
@@ -92,12 +94,27 @@ export class Game {
     ctx.restore();
 
     if(this.gamestate === GAMESTATE.INTRO){
+      let introText = [
+        "Death is not the end...",
+        "It's a party!",
+        "But your friends are all",
+        "sleeping in their graves.",
+        "Visit all their tombstones",
+        "before dawn to bring this",
+        "party... back to life!",
+        "",
+        "Press [enter]",
+        " to start the party"
+      ]
       ctx.drawImage(this.gravestone, 0,0, this.gameWidth, this.gameHeight)
 
-      ctx.font = "36 " + font;
+      ctx.font = "32px " + font;
       ctx.fillStyle = colorScheme[0];
       ctx.textAlign = "center";
-      ctx.fillText("Death is not the end...", this.gameWidth/2, this.gameHeight/2);
+      for(let i=0; i<introText.length; i++){
+        ctx.fillText(introText[i], this.gameWidth/2 + 48, (this.gameHeight/4) + 36*i);
+      }
+
     }
 
     if(this.gamestate === GAMESTATE.PAUSED){
@@ -108,7 +125,12 @@ export class Game {
       ctx.font = "3em " + font;
       ctx.fillStyle = colorScheme[4];
       ctx.textAlign = "center";
-      ctx.fillText("Paused", this.gameWidth/2, this.gameHeight/2);
+      ctx.fillText("Paused", this.gameWidth/2, this.gameHeight/4);
+      ctx.font = "1em " + font;
+      ctx.fillText("Visit all the graves before dawn!",this.gameWidth/2, this.gameHeight/2)
+      ctx.font = "1em " + font;
+      ctx.fillText("[arrow keys] to move", this.gameWidth/2, 3*this.gameHeight/4 +36);
+      ctx.fillText("[space] to wake up your dead friends", this.gameWidth/2, 3*this.gameHeight/4 +72);
     }
     if(this.gamestate === GAMESTATE.MENU){
       let gradient = ctx.createLinearGradient(0, 0, 0, this.gameHeight)
@@ -121,10 +143,13 @@ export class Game {
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, this.gameWidth, this.gameHeight);
 
-      ctx.font = "3em " + font;
+      ctx.font = "2.5em " + font;
       ctx.fillStyle = colorScheme[6];
       ctx.textAlign = "center";
-      ctx.fillText("Menu", this.gameWidth/2, this.gameHeight/2);
+      ctx.fillText("Death is a Party!", this.gameWidth/2, this.gameHeight/4);
+      ctx.font = "1.5em " + font;
+      ctx.fillText("[esc] for controls", this.gameWidth/2, this.gameHeight/2+36);
+      ctx.fillText("[enter] to start", this.gameWidth/2, this.gameHeight/2+72);
     }
     if(this.gamestate === GAMESTATE.GAMEOVER){
       ctx.fillStyle = colorScheme[6];
@@ -165,13 +190,13 @@ export class Game {
     if(this.gamestate == GAMESTATE.RUNNING){
       this.gamestate = GAMESTATE.WIN
       this.music.pause()
+      this.totalGraves += 5;
     }
   }
   restart(){
     this.gameTime = 0;
     this.skyProgress = 0;
     this.timeSinceProgress = 0
-    this.totalGraves += 5;
     this.graves = []
     while(this.graves.length < this.totalGraves){
       let x = Math.floor(Math.random()*16)*32
@@ -179,6 +204,14 @@ export class Game {
       this.graves.push(new Grave(x, y));
     }
     Grave.resetVisits();
+    this.player.reset();
     this.gamestate = GAMESTATE.MENU;
+  }
+  goToMenu(){
+    if(
+      this.gamestate === GAMESTATE.RUNNING ||
+      this.gamestate === GAMESTATE.MENU
+    ) return;
+    this.gamestate = GAMESTATE.MENU
   }
 }

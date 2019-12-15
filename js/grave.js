@@ -22,10 +22,13 @@ export default class Grave{
     this.visited = true;
     Grave.addVisit();
   }
-  static addVisit(){
+  static initVisits(){
     if(!this.visited){
       this.visited = 0;
     }
+  }
+  static addVisit(){
+
     this.visited += 1;
   }
   static countVisits(){
